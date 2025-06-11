@@ -14,9 +14,9 @@
     html, body {
       width: 100%;
       height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000;
       overflow: hidden;
-      font-family: Arial, sans-serif;
-      background: none;
     }
 
     .splash {
@@ -27,45 +27,81 @@
       background: black;
     }
 
-    .btn {
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      color: white;
-      background: #444;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+     .btn {
+   padding: 1rem 2rem;
+   font-size: 1.4rem;
+   font-weight: bold;
+   color: white;
+   background: linear-gradient(45deg, #ff7e91, #ffc174);
+   border: none;
+   border-radius: 12px;
+   cursor: pointer;
+   animation: heartbeat 1.5s infinite;
+   box-shadow: 0 0 20px #ffb199;
+   transition: transform 0.2s ease;
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ffb199;
+  }
+  14% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ffc174;
+  }
+  28% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ffb199;
+  }
+  42% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ffc174;
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ffb199;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px #ffb199;
+  }
+}
 
     .btn:hover {
-      background: #666;
+      transform: scale(1.05);
     }
 
+     @keyframes pulse {
+     0% { box-shadow: 0 0 10px #ffb199; }
+     50% { box-shadow: 0 0 20px #ffc174; }
+     100% { box-shadow: 0 0 10px #ffb199; }
+}
+
     .main {
+      display: none;
+      width: 100%;
+      height: 100%;
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      display: none;
     }
 
     video.bg {
       position: fixed;
       top: 0;
       left: 0;
+      object-fit: cover;
       width: 100%;
       height: 100%;
-      object-fit: cover;
       z-index: 0;
     }
 
     .marquee {
-      position: relatife;
+      position: absolute;
       top: 0;
       width: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.7);
       color: #00ffff;
       font-weight: bold;
       font-size: 14px;
@@ -88,18 +124,16 @@
 
     .overlay {
       position: relative;
-     z-index: 2;
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     justify-content: flex-start;
-     height: 100%;
-     padding-top: 4.5rem;
-     background: rgba(0, 0, 0, 0.0);
-     backdrop-filter: blur(0px);
-     color: white;
-     text-align: center;
-     gap: 1rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100%;
+      padding-top: 4.5rem;
+      color: white;
+      text-align: center;
+      gap: 1rem;
     }
 
     .profile {
@@ -112,14 +146,13 @@
 
     h1 {
       font-size: 2rem;
-      margin-bottom: 1rem;
     }
 
     .tabs {
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-top: 1rem;
     }
 
     .tab-btn {
@@ -140,44 +173,85 @@
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
+      margin-top: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.5s forwards;
     }
 
-    .link-card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 1rem 1.5rem;
-      height: 64px; /* tinggi tetap */
-      width: 300px; /* ganti ini sesuai panjang yang kamu mau */
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: white;
-      transition: background 0.3s ease;
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
+      .link-card {
+   background: rgba(255, 255, 255, 0.1);
+   padding: 1rem 1.5rem;
+   height: 64px;
+   width: 300px;
+   border-radius: 12px;
+   display: flex;
+   align-items: center;
+   gap: 0.75rem;
+   color: white;
+   text-decoration: none;
+   position: relative;
+   left: 0;
+   animation: shakeLeftRight 1s ease forwards;
+   transition: all 0.3s ease;
+   box-shadow: 0 0 0px rgba(255,255,255,0.3);
 }
 
+/* Efek hover umum */
     .link-card:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: 0 0 12px #00ffff80, 0 0 24px #00ffff40;
+}
 
-    .link-card img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: white;
-      padding: 4px;
-    }
+/* Efek glow sesuai jenis platform */
+    .link-card:hover img[alt*="WhatsApp"] {
+      box-shadow: 0 0 12px #25D366;
+}
+    .link-card:hover img[alt*="Instagram"] {
+      box-shadow: 0 0 12px #E1306C;
+}
+    .link-card:hover img[alt*="Telegram"] {
+      box-shadow: 0 0 12px #0088cc;
+}
+    .link-card:hover img[alt*="Github"] {
+      box-shadow: 0 0 12px #ffffff;
+}
+
+/* Tambahkan animasi halus ke ikon */
+   .link-card img {
+     width: 32px;
+     height: 32px;
+     background: white;
+     border-radius: 50%;
+     padding: 4px;
+     transition: all 0.3s ease;
+}
 
     .viewer {
-      margin-top: 1rem;
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #111;
+      padding: 8px 16px;
+      border-radius: 20px;
       font-size: 0.9rem;
       display: flex;
-      justify-content: center;
       align-items: center;
       gap: 0.3rem;
-      opacity: 0.9;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+      z-index: 20;
+      box-shadow: 0 0 12px #00ffff44;
+      opacity: 0;
+      transition: opacity 0.8s ease;
     }
 
     .viewer img {
@@ -189,27 +263,22 @@
 </head>
 <body>
 
-  <!-- Splash -->
   <div class="splash" id="splash">
-    <button class="btn" onclick="startSite()">Masuk</button>
+    <button class="btn" onclick="startSite()">Masuk💦</button>
   </div>
 
-  <!-- Main -->
   <div class="main" id="main">
-    <!-- Background Video -->
-    <video class="bg" autoplay play mute loop>
-  <source src="assets/bg.mp4" type="video/mp4">
-  Browser tidak mendukung pemutaran video.
-</video>
+    <video class="bg" autoplay play mute loop playsinline>
+      <source src="assets/bg.mp4" type="video/mp4">
+      Browser tidak mendukung pemutaran video.
+    </video>
 
-    <!-- Teks Berjalan -->
     <div class="marquee">
       <span>Wellcome to website Emix! All kontak & sosmed dll sudah tertera di bawah. Jangan lupa untuk follow sosmed Emix Yaw!!</span>
     </div>
 
-    <!-- Konten Utama -->
     <div class="overlay">
-      <img src="https://qu.ax/KrGDQ.png" alt="Profile" class="profile" />
+      <img src="https://qu.ax/KrGDQ.png" class="profile" alt="Profile" />
       <h1>EMIX STORE 🌊</h1>
 
       <div class="tabs">
@@ -220,56 +289,106 @@
 
       <div id="sosmed" class="links">
         <a href="https://wa.me/62895391694499" class="link-card" target="_blank">
-          <img src="icons/whatsapp.svg" alt="WhatsApp"> WhatsApp
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp"> WhatsApp
         </a>
-        <a href="https://youtube.com" class="link-card" target="_blank">
-          <img src="icons/youtube.svg" alt="YouTube"> YouTube
+        <a href="https://t.me/emiixdev" class="link-card" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram"> Telegram
         </a>
-        <a href="https://instagram.com" class="link-card" target="_blank">
-          <img src="icons/instagram.svg" alt="Instagram"> Instagram
+        <a href="https://www.instagram.com/emixstr_?igsh=MTlobG5zZmE5NGZjbw==" class="link-card" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"> Instagram
         </a>
-        <a href="https://tiktok.com" class="link-card" target="_blank">
-          <img src="icons/tiktok.svg" alt="TikTok"> TikTok
+        <a href="https://github.com/Emixdev" class="link-card" target="_blank">
+          <img src="https://qu.ax/JcHoL.jpg" alt="Github"> Github
         </a>
       </div>
 
       <div id="grup" class="links" style="display:none">
-        <a href="https://chat.whatsapp.com/" class="link-card" target="_blank">
-          <img src="icons/whatsapp.svg" alt="WhatsApp"> Grup WhatsApp
+        <a href="https://chat.whatsapp.com/GWjw9m36E2HKrRgQL8Ezmh" class="link-card" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="Grup WA"> Grup WhatsApp
         </a>
         <a href="https://t.me/" class="link-card" target="_blank">
-          <img src="icons/telegram.svg" alt="Telegram"> Grup Telegram
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram"> Grup Telegram
         </a>
       </div>
 
       <div id="saluran" class="links" style="display:none">
         <a href="https://t.me/" class="link-card" target="_blank">
-          <img src="icons/telegram.svg" alt="Telegram"> Saluran Telegram
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram"> Saluran Telegram
         </a>
-      </div>
-
-      <!-- Fake Viewer -->
-      <div class="viewer">
-        <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" alt="Eye" />
-        <span>1.207 Pengunjung Hari Ini</span>
+        <a href="https://whatsapp.com/channel/0029Vb8fnU1KgsNnWIjovy2F" class="link-card" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhastApp"> Saluran WhatsApp 
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Script -->
+  <div class="viewer">
+    <img src="https://cdn-icons-png.flaticon.com/512/709/709612.png" alt="Eye" />
+    <span>1.207 Pengunjung Hari Ini</span>
+  </div>
+
   <script>
     function startSite() {
       document.getElementById("splash").style.display = "none";
       document.getElementById("main").style.display = "block";
+      document.querySelector(".viewer").style.opacity = 1;
     }
 
     function showTab(tabId) {
       const tabs = ["sosmed", "grup", "saluran"];
       tabs.forEach(id => {
-        document.getElementById(id).style.display = id === tabId ? "flex" : "none";
-        document.querySelector(`.tab-btn[onclick*='${id}']`).classList.toggle('active', id === tabId);
+        const section = document.getElementById(id);
+        const btn = document.querySelector(`.tab-btn[onclick*="${id}"]`);
+        section.style.display = id === tabId ? "flex" : "none";
+        section.style.animation = id === tabId ? "fadeInUp 0.5s ease forwards" : "none";
+        btn.classList.toggle("active", id === tabId);
       });
     }
+
+    // Fake Visitor Count Logic
+    const viewerEl = document.querySelector('.viewer span');
+    const STORAGE_KEY = 'visitorData_emix';
+
+    function animateCount(el, start, end, duration) {
+      const range = end - start;
+      const startTime = performance.now();
+
+      function update(currentTime) {
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const value = Math.floor(start + range * progress);
+        el.textContent = value.toLocaleString('id-ID') + ' Pengunjung Hari Ini';
+        if (progress < 1) requestAnimationFrame(update);
+      }
+
+      requestAnimationFrame(update);
+    }
+
+    function generateVisitorCount(base = 1000) {
+      const random = Math.floor(Math.random() * 100);
+      const direction = Math.random() > 0.4 ? 1 : -1;
+      return Math.max(base + direction * random, 1);
+    }
+
+    function loadVisitorCount() {
+      const now = Date.now();
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      const lastUpdate = data.timestamp || 0;
+
+      if (!data.count || now - lastUpdate > 86400000) {
+        const newCount = generateVisitorCount();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ count: newCount, timestamp: now }));
+        return newCount;
+      }
+
+      const newCount = generateVisitorCount(data.count);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ count: newCount, timestamp: lastUpdate }));
+      return newCount;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const count = loadVisitorCount();
+      animateCount(viewerEl, 0, count, 1200);
+    });
   </script>
 
 </body>
